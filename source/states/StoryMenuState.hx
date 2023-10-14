@@ -6,7 +6,6 @@ import backend.Song;
 
 import flixel.group.FlxGroup;
 import flixel.graphics.FlxGraphic;
-import openfl.utils.Assets;
 
 import objects.MenuItem;
 import objects.MenuCharacter;
@@ -52,35 +51,27 @@ class StoryMenuState extends MusicBeatState
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
-		scoreText = new FlxText(FlxG.width * 0.5, 5, 1280, "SCORE: 49324858", 36);
-		scoreText.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 32);
-		scoreText.alignment = CENTER;
-        scoreText.screenCenter(X);
-        scoreText.antialiasing = ClientPrefs.data.antialiasing;
-        
-		txtWeekTitle = new FlxText(FlxG.width * 0.5, 50, 1280, "", 32);
-		txtWeekTitle.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 20);
-		txtWeekTitle.alignment = CENTER;
-		txtWeekTitle.screenCenter(X);
-		txtWeekTitle.antialiasing = ClientPrefs.data.antialiasing;
-		// txtWeekTitle.alpha = 0.7;
+		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
+		scoreText.setFormat("VCR OSD Mono", 32);
+
+		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
+		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
+		txtWeekTitle.alpha = 0.7;
 
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 32);
+		rankText.setFormat(Paths.font("vcr.ttf"), 32);
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
-		rankText.antialiasing = ClientPrefs.data.antialiasing;
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
-		var bgGray:FlxSprite = new FlxSprite(0, 45).makeGraphic(FlxG.width, 40, 0xFF2B2B2B);
-		bgSprite = new FlxSprite(0, 85);
-		bgSprite.antialiasing = ClientPrefs.data.antialiasing;
+		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
+		bgSprite = new FlxSprite(0, 56);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
 
-		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 85, FlxColor.BLACK);
+		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
 		add(blackBarThingie);
 
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();
@@ -137,6 +128,13 @@ class StoryMenuState extends MusicBeatState
 		difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
 
+		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
+		leftArrow.antialiasing = ClientPrefs.data.antialiasing;
+		leftArrow.frames = ui_tex;
+		leftArrow.animation.addByPrefix('idle', "arrow left");
+		leftArrow.animation.addByPrefix('press', "arrow push left");
+		leftArrow.animation.play('idle');
+		difficultySelectors.add(leftArrow);
 
 		Difficulty.resetList();
 		if(lastDifficultyName == '')
@@ -145,9 +143,19 @@ class StoryMenuState extends MusicBeatState
 		}
 		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
 
-		
+		sprDifficulty = new FlxSprite(0, leftArrow.y);
+		sprDifficulty.antialiasing = ClientPrefs.data.antialiasing;
+		difficultySelectors.add(sprDifficulty);
 
-		add(bgGray);
+		rightArrow = new FlxSprite(leftArrow.x + 376, leftArrow.y);
+		rightArrow.antialiasing = ClientPrefs.data.antialiasing;
+		rightArrow.frames = ui_tex;
+		rightArrow.animation.addByPrefix('idle', 'arrow right');
+		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
+		rightArrow.animation.play('idle');
+		difficultySelectors.add(rightArrow);
+
+		add(bgYellow);
 		add(bgSprite);
 		add(grpWeekCharacters);
 
@@ -155,8 +163,8 @@ class StoryMenuState extends MusicBeatState
 		tracksSprite.antialiasing = ClientPrefs.data.antialiasing;
 		add(tracksSprite);
 
-		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 25);
-		txtTracklist.alignment = LEFT;
+		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
+		txtTracklist.alignment = CENTER;
 		txtTracklist.font = rankText.font;
 		txtTracklist.color = 0xFFe55777;
 		add(txtTracklist);
@@ -207,8 +215,14 @@ class StoryMenuState extends MusicBeatState
 			}
 
 			if (controls.UI_RIGHT)
-				
+				rightArrow.animation.play('press')
+			else
+				rightArrow.animation.play('idle');
+
 			if (controls.UI_LEFT)
+				leftArrow.animation.play('press');
+			else
+				leftArrow.animation.play('idle');
 
 			#if !android
 			if(FlxG.mouse.wheel != 0)
@@ -333,10 +347,10 @@ class StoryMenuState extends MusicBeatState
 	{
 		curDifficulty += change;
 
-		if (curDifficulty < 1)
-			curDifficulty = 1;
-		if (curDifficulty >= 1)
-			curDifficulty = 1;
+		if (curDifficulty < 0)
+			curDifficulty = Difficulty.list.length-1;
+		if (curDifficulty >= Difficulty.list.length)
+			curDifficulty = 0;
 
 		WeekData.setDirectoryFromWeek(loadedWeeks[curWeek]);
 
