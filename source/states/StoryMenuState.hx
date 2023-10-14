@@ -145,10 +145,6 @@ class StoryMenuState extends MusicBeatState
 		}
 		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
 
-		sprDifficulty = new FlxSprite(0, leftArrow.y);
-		sprDifficulty.antialiasing = ClientPrefs.data.antialiasing;
-		difficultySelectors.add(sprDifficulty);
-
 		
 
 		add(bgGray);
