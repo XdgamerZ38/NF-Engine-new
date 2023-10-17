@@ -93,7 +93,7 @@ class StoryMenuState extends MusicBeatState
 				weekThing.targetY = num;
 				grpWeekText.add(weekThing);
 
-				weekThing.screenCenter(X);
+				weekThing.x += 750;
 				// weekThing.updateHitbox();
 
 				// Needs an offset thingie
@@ -323,7 +323,7 @@ class StoryMenuState extends MusicBeatState
 			if (item.targetY == Std.int(0) && unlocked)
 				item.alpha = 1;
 			else
-				item.alpha = 0.6;
+				item.alpha = 0.3;
 			bullShit++;
 		}
 
