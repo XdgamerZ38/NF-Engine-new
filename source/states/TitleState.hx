@@ -86,7 +86,7 @@ class TitleState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
-		Lib.application.window.title = " NF - Engine - Title";
+		Lib.application.window.title = " slice funk saturday- Title";
 		
 		//https://github.com/beihu235/AndroidDialogs
 		var lang:String = '';
@@ -94,7 +94,7 @@ class TitleState extends MusicBeatState
 		if (DeviceLanguage.getLang() == 'zh') 
 		lang = 'NF1.1.0测试版\nb站-北狐丶逐梦制作\n禁止上传到任何资源网站';
 		else
-		lang = 'NF1.1.0 android port test\nmade by NF|beihu';
+		lang = 'cool mod,make a yt vid ab this mod or feel my wrath';
 		#end
 			
 		if(!checkOpenFirst){
@@ -295,7 +295,7 @@ class TitleState extends MusicBeatState
 
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
-		logoBl.scale.set(0.5, 0.5);
+		logoBl.scale.set(0.4, 0.4);
 		logoBl.updateHitbox();
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
@@ -636,15 +636,15 @@ class TitleState extends MusicBeatState
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 40);
+					createCoolText(['This mod is directed by'], 40);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				// credTextShit.visible = true;
 				case 4:
 					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 40);
-					addMoreText('Riveren', 40);
+					addMoreText('Allianzee', 40);
+					addMoreText('Slicecraftig', 40);
 					#else
 					addMoreText('present');
 					#end
@@ -656,10 +656,10 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 6:
-					createCoolText(['NF Engine by(cool engine btw)'], 40);
+					createCoolText(['community game if ur playing this'], 40);
 				// credTextShit.visible = true;
 				case 7:
-					addMoreText('beihu', 40);
+					addMoreText('Thank you', 40);
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
 				case 8:
@@ -688,7 +688,7 @@ class TitleState extends MusicBeatState
 					createCoolText([curWacky[0]]);
 				// credTextShit.visible = true;
 				case 13:
-					addMoreText(curWacky[1]);
+					addMoreText(curWacky[0]);
 				// credTextShit.text += '\nlmao';
 				case 14:
 					deleteCoolText();
@@ -704,8 +704,10 @@ class TitleState extends MusicBeatState
 				case 17:
 					addMoreText('Saturday');
 				// credTextShit.text += '\nFunkin';
-
 				case 18:
+					addMoreText('Lessgoooooo');
+				// credTextShit.text += '\nFunkin';
+				case 19:
 					skipIntro();
 			}
 		}
