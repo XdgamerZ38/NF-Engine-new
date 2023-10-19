@@ -656,10 +656,10 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 6:
-					createCoolText(['community game if ur playing this'], 40);
+					createCoolText(['community game'], 40);
 				// credTextShit.visible = true;
 				case 7:
-					addMoreText('Thank you', 40);
+					addMoreText('is the goat', 40);
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
 				case 8:
