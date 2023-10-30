@@ -1,4 +1,4 @@
-# Friday Night Funkin' - NF Engine
+# Friday Night Funkin' - Alli Engine
 
 ## Installation:
 You must have [Haxe version 4.2.5](https://haxe.org/download/version/4.2.5/), seriously, stop using older or newer versions, it won't work!
@@ -19,8 +19,8 @@ to start you off, disabling Videos should be simple, simply Delete the line `"VI
 
 same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, this and other customization options are all available within the `Project.xml` file
 
-## NF Engine Credits:
-* NF|Beihu - Creator
+## Alli Engine Credits:
+* Allianzee - Creator
 
 ## Psych Engine Credits:
 * Shadow Mario - Programmer
@@ -112,3 +112,4 @@ _____________________________________
 * You can reset your Score on Freeplay/Story Mode by pressing Reset button.
 * You can listen to a song or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Space.
 * You can enable "Combo Stacking" in Gameplay Options. This causes the combo sprites to just be one sprite with an animation rather than sprites spawning each note hit.
+* Added space button for android   Alli engine
